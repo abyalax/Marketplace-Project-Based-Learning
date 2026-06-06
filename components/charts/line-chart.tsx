@@ -137,7 +137,8 @@ export function LineChart<T extends Record<string, unknown>>({ data, loading, op
             mode: mergedOptions.tooltip.interactionMode,
             callbacks: {
               label: (tooltipItems: TooltipItem<'line'>) =>
-                mergedOptions.tooltip.tooltipFormatter?.(tooltipItems.formattedValue, tooltipItems.dataset.label || '') ?? tooltipItems.formattedValue,
+                mergedOptions.tooltip.tooltipFormatter?.(tooltipItems.formattedValue, tooltipItems.dataset.label || '') ??
+                tooltipItems.formattedValue,
             },
           },
           legend: {

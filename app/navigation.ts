@@ -5,16 +5,19 @@ export const navigationClient = (clientId: string) => [
 
 export const navigationAdmin = [
   { name: 'Home', href: '/backoffice' },
-  { name: 'Clients', href: '/backoffice/clients' },
-  { name: 'Create Client', href: '/clients/create' },
+  { name: 'Users', href: '/backoffice/clients' },
+  { name: 'Create User', href: '/clients/create' },
 ];
 
 export const navigationGuest = [
   { name: 'Home', href: '/' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Mentors', href: '/mentors' },
   { name: 'Order', href: '/order' },
   { name: 'Pricing', href: '/pricing' },
+  { name: 'Live Learning', href: '/live-learning' },
 
   /**Just For Development */
-  { name: 'Client', href: '/1' },
+  { name: 'Learner', href: '/1' },
   { name: 'Admin', href: '/backoffice' },
 ];

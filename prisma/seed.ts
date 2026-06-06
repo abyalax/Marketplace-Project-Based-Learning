@@ -2,7 +2,6 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '~/generated/prisma/client';
 
 import 'dotenv/config';
-import { cvSeeder } from './seeds/cv-seeder';
 import { userSeeder } from './seeds/user-seeder';
 
 const adapter = new PrismaPg({
@@ -14,14 +13,13 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
-  console.log('⚡ Seeding deterministic data...');
+  console.log('Seeding deterministic marketplace data...');
   await userSeeder();
-  await cvSeeder();
 }
 
 main()
   .then(() => {
-    console.log('✅ Seed data successfully created');
+    console.log('Seed data successfully created');
     prisma.$disconnect();
     process.exit(0);
   })

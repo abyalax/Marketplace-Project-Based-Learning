@@ -14,8 +14,12 @@ export type UseDebouncedCallbackReturnValue<T extends (...args: any[]) => any> =
   cancel: () => void;
 };
 
-export function useDebouncedCallback<T extends (...args: any[]) => any>(callback: T, options: number | UseDebouncedCallbackOptions) {
-  const { delay, flushOnUnmount, leading } = typeof options === 'number' ? { delay: options, flushOnUnmount: false, leading: false } : options;
+export function useDebouncedCallback<T extends (...args: any[]) => any>(
+  callback: T,
+  options: number | UseDebouncedCallbackOptions,
+) {
+  const { delay, flushOnUnmount, leading } =
+    typeof options === 'number' ? { delay: options, flushOnUnmount: false, leading: false } : options;
 
   const handleCallback = useCallbackRef(callback);
   const debounceTimerRef = useRef(0);

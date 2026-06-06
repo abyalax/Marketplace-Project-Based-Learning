@@ -8,21 +8,26 @@ export const QUERY_KEY = {
     FORGOT_PASSWORD: 'forgot_password',
     RESET_PASSWORD: 'reset_password',
   },
-  CV: {
-    GETS: 'get_cvs',
-    GET_BY_ID: 'get_cv_by_id',
-
-    CREATE: 'create_cv',
-    UPDATE: 'update_cv',
-    DELETE: 'delete_cv',
+  PROJECT: {
+    GETS: 'get_projects',
+    GET_BY_ID: 'get_project_by_id',
+    CREATE: 'create_project',
+    UPDATE: 'update_project',
+    DELETE: 'delete_project',
   },
-  CLIENT: {
-    GETS: 'get_clients',
-    GET_BY_ID: 'get_client_by_id',
-
-    CREATE: 'create_client',
-    UPDATE: 'update_client',
-    DELETE: 'delete_client',
+  CLASS: {
+    GETS: 'get_classes',
+    GET_BY_ID: 'get_class_by_id',
+    CREATE: 'create_class',
+    UPDATE: 'update_class',
+    DELETE: 'delete_class',
+  },
+  USER: {
+    GETS: 'get_users',
+    GET_BY_ID: 'get_user_by_id',
+    CREATE: 'create_user',
+    UPDATE: 'update_user',
+    DELETE: 'delete_user',
   },
 } as const;
 

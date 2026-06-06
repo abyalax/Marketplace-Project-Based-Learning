@@ -61,7 +61,13 @@ const defaultOptions = {
   },
 };
 
-export function BarChart<T extends Record<string, unknown>>({ data, loading, options = defaultOptions, LoadingComponent, NoDataComponent }: BarChartProps<T>) {
+export function BarChart<T extends Record<string, unknown>>({
+  data,
+  loading,
+  options = defaultOptions,
+  LoadingComponent,
+  NoDataComponent,
+}: BarChartProps<T>) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chartRef = useRef<Chart | null>(null);
 

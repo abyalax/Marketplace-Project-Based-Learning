@@ -33,6 +33,20 @@ const envSchema = z.object({
   MAILPIT_SERVER_PASSWORD: z.string().min(1, 'MAILPIT_SERVER_PASSWORD is required for email services'),
   MAILPIT_FROM: z.string().min(1, 'EMAIL_FROM is required for email services'),
 
+  /**Object Storage */
+  MINIO_ENDPOINT: z.string().min(1).default('http://localhost:9000'),
+  MINIO_REGION: z.string().min(1).default('us-east-1'),
+  MINIO_BUCKET: z.string().min(1).default('marketplace-learning-assets'),
+  MINIO_ROOT_USER: z.string().min(1).default('marketplace_minio'),
+  MINIO_ROOT_PASSWORD: z.string().min(1).default('marketplace_minio_password'),
+  MINIO_USE_SSL: z.string().min(1).default('false'),
+  MINIO_PUBLIC_ASSET_BASE_URL: z.string().min(1).default('http://localhost:9000/marketplace-learning-assets'),
+
+  /**Xendit Sandbox */
+  XENDIT_SECRET_KEY: z.string().min(1).default('xnd_development_secret_key'),
+  XENDIT_WEBHOOK_TOKEN: z.string().min(1).default('xendit_webhook_token'),
+  XENDIT_CALLBACK_BASE_URL: z.string().min(1).default('http://localhost:3000/api/webhooks/xendit'),
+
   /**Email JS Services */
   /**
    EMAIL_USER_ID: z.string().min(1, 'EMAIL_USER_ID is required, go to set up at email JS'),

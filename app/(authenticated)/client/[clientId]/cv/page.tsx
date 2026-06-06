@@ -1,39 +1,17 @@
 import { Metadata } from 'next';
 import { PageScreen } from '~/components/layouts/page';
-import { url } from '~/lib/utils/converter';
-import { Component } from './_components';
 
 export const metadata: Metadata = {
-  title: 'Curriculum Vitae',
+  title: 'Legacy CV Reference',
 };
 
-const breadcrumbItems = (clientId: string) => [
-  {
-    title: 'Home',
-    url: '/',
-    active: false,
-  },
-  {
-    title: 'Dashboard',
-    url: url('/client/[clientId]/dashboard', { clientId }),
-    active: false,
-  },
-  {
-    title: 'CV',
-    url: url('/client/[clientId]/cv', { clientId }),
-    active: true,
-  },
-];
-
-type Props = PageProps<'/client/[clientId]/cv'>;
-
-export default async function Page({ params }: Readonly<Props>) {
-  const { clientId } = await params;
-  const breadcrumbs = breadcrumbItems(clientId);
-
+export default function Page() {
   return (
-    <PageScreen title="Curriculum Vitae" breadcrumbs={breadcrumbs}>
-      <Component />
+    <PageScreen title="Legacy CV Reference" breadcrumbs={[]}>
+      <p className="text-muted-foreground text-sm">
+        This boilerplate CV feature is retired from the active product. Its source remains as a reference pattern while Sprint 1
+        defines the marketplace schema foundation.
+      </p>
     </PageScreen>
   );
 }

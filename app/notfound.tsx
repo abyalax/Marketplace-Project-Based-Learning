@@ -26,7 +26,11 @@ export default function NotFoundPage() {
           Go Home
         </button>
 
-        <button onClick={() => reload()} type="button" className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100">
+        <button
+          onClick={() => reload()}
+          type="button"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100"
+        >
           Refresh Page
         </button>
       </div>

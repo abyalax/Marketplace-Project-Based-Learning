@@ -1,7 +1,1 @@
-import { PERMISSIONS } from '~/common/const/permission';
-export const permissions = [
-  PERMISSIONS.CLIENT.READ_CV,
-  PERMISSIONS.CLIENT.CREATE_CV,
-  PERMISSIONS.CLIENT.UPDATE_CV,
-  PERMISSIONS.CLIENT.DELETE_CV,
-];
+export const permissions: string[] = [];

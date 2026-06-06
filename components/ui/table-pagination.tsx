@@ -1,6 +1,14 @@
 'use client';
 
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from './pagination';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from './pagination';
 
 interface TablePaginationProps {
   totalPages: number;
@@ -11,7 +19,14 @@ interface TablePaginationProps {
   maxVisiblePages?: number;
 }
 
-export function TablePagination({ totalPages, currentPage, onPageChange, onPreviousPage, onNextPage, maxVisiblePages = 7 }: TablePaginationProps) {
+export function TablePagination({
+  totalPages,
+  currentPage,
+  onPageChange,
+  onPreviousPage,
+  onNextPage,
+  maxVisiblePages = 7,
+}: TablePaginationProps) {
   const generatePageNumbers = () => {
     if (totalPages <= maxVisiblePages) {
       return Array.from({ length: totalPages }, (_, i) => i + 1);

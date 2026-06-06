@@ -13,7 +13,7 @@ export class UserRepository extends Repository<Prisma.UserDelegate, Prisma.UserW
   }
 
   findByEmail(email: string) {
-    return this.model.findUniqueOrThrow({
+    return this.model.findUnique({
       where: { email },
     });
   }

@@ -1,6 +1,7 @@
 import z from 'zod';
 
-export const numberAsString = (min: number, max: number) => z.preprocess((val) => (val !== undefined ? Number(val) : undefined), z.number().min(min).max(max));
+export const numberAsString = (min: number, max: number) =>
+  z.preprocess((val) => (val !== undefined ? Number(val) : undefined), z.number().min(min).max(max));
 
 export const basePaginationSchema = (entityKey: readonly [string, ...string[]]) =>
   z.object({

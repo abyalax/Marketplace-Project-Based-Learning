@@ -1,41 +1,51 @@
-import { BotIcon, FileText, HelpCircle, Home, LayoutDashboard, MessagesSquare, Notebook, Settings, Table2 } from 'lucide-react';
+import {
+  BookOpen,
+  GraduationCap,
+  HelpCircle,
+  Home,
+  LayoutDashboard,
+  MessagesSquare,
+  Settings,
+  Table2,
+  Users,
+} from 'lucide-react';
 import { PERMISSIONS } from '~/common/const/permission';
 import { MenuGroup, MenuItem } from '~/components/fragments/sidebar/sidebar-app';
 import { url } from '~/lib/utils/converter';
 
 export const sidebarItems = (clientId: string): MenuGroup[] => [
   {
-    group: 'Client',
+    group: 'Learner',
     items: [
       {
         title: 'Dashboard',
         url: url('/client/[clientId]/dashboard', { clientId }),
         icon: LayoutDashboard,
-        permissions: [PERMISSIONS.CLIENT.READ_CV, PERMISSIONS.CLIENT.READ_CHATS, PERMISSIONS.CLIENT.READ_ANALYZE],
+        permissions: [PERMISSIONS.LEARNER.READ_PROJECT, PERMISSIONS.LEARNER.READ_CLASS],
       },
       {
-        title: 'Curriculum Vitae',
+        title: 'Projects',
         url: url('/client/[clientId]/cv', { clientId }),
         icon: Table2,
-        permissions: [PERMISSIONS.CLIENT.READ_CV],
+        permissions: [PERMISSIONS.LEARNER.READ_PROJECT],
       },
       {
         title: 'Messages',
         url: url('/client/[clientId]/messages', { clientId }),
         icon: MessagesSquare,
-        permissions: [PERMISSIONS.CLIENT.READ_CHATS],
+        permissions: [PERMISSIONS.LEARNER.READ_MESSAGES],
       },
       {
-        title: 'Chats',
+        title: 'Classes',
         url: url('/client/[clientId]/chats', { clientId }),
-        icon: BotIcon,
-        permissions: [PERMISSIONS.CLIENT.READ_CHATS],
+        icon: GraduationCap,
+        permissions: [PERMISSIONS.LEARNER.READ_CLASS],
       },
       {
-        title: 'Analyze',
+        title: 'Progress',
         url: url('/client/[clientId]/analyze', { clientId }),
-        icon: FileText,
-        permissions: [PERMISSIONS.CLIENT.READ_ANALYZE],
+        icon: BookOpen,
+        permissions: [PERMISSIONS.LEARNER.READ_ENROLLMENT],
       },
     ],
   },
@@ -43,16 +53,16 @@ export const sidebarItems = (clientId: string): MenuGroup[] => [
     group: 'Backoffice',
     items: [
       {
-        title: 'Dasboard',
+        title: 'Dashboard',
         url: url('/backoffice/dashboard'),
         icon: Home,
-        permissions: [PERMISSIONS.ADMIN.READ_CLIENT],
+        permissions: [PERMISSIONS.ADMIN.READ_TRAFFIC],
       },
       {
-        title: 'Clients',
+        title: 'Users',
         url: url('/backoffice/clients'),
-        icon: Notebook,
-        permissions: [PERMISSIONS.ADMIN.READ_CLIENT],
+        icon: Users,
+        permissions: [PERMISSIONS.ADMIN.MANAGE_USERS],
       },
     ],
   },

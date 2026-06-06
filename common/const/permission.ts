@@ -1,60 +1,52 @@
-/** biome-ignore-all lint/style/useNamingConvention: <off> */
-export type roles = 'Client' | 'Admin';
+/** biome-ignore-all lint/style/useNamingConvention: permission namespaces are intentionally uppercase */
+export type roles = 'Learner' | 'Mentor' | 'Admin';
 
 export const ROLE = Object.freeze({
-  CLIENT: 'Client',
+  LEARNER: 'Learner',
+  MENTOR: 'Mentor',
   ADMIN: 'Admin',
 } as const);
 
-export const ROLEIDS = Object.freeze({
-  Client: 1,
-  Admin: 2,
-} as const);
-
 export const PERMISSIONS = Object.freeze({
-  ADMIN: {
-    READ_CLIENT: 'client:read',
-    UPDATE_CLIENT: 'client:update',
-    CREATE_CLIENT: 'client:create',
-    DELETE_CLIENT: 'client:delete',
-
-    SINGLE_ANALYZE_CV: 'cv:single_analyze',
-    BULK_ANALYZE_CV: 'cv:bulk_analyze',
-    READ_ANALYZE_CV: 'cv:read_analyze',
-
-    READ_CV: 'cv:read',
-    UPDATE_CV: 'cv:update',
-    CREATE_CV: 'cv:create',
-    DELETE_CV: 'cv:delete',
-
-    READ_CHATS: 'chat:read',
-    UPDATE_CHATS: 'chat:update',
-    CREATE_CHATS: 'chat:create',
-    DELETE_CHATS: 'chat:delete',
-
+  LEARNER: {
+    READ_PROJECT: 'project:read',
+    READ_CLASS: 'class:read',
     READ_MESSAGES: 'messages:read',
-    UPDATE_MESSAGES: 'messages:update',
-    CREATE_MESSAGES: 'messages:create',
-    DELETE_MESSAGES: 'messages:delete',
-
-    READ_AGENT: 'agent:read',
-    UPDATE_AGENT: 'agent:update',
-    CREATE_AGENT: 'agent:create',
-    DELETE_AGENT: 'agent:delete',
+    CREATE_ENROLLMENT: 'enrollment:create',
+    READ_ENROLLMENT: 'enrollment:read',
+    UPDATE_PROGRESS: 'progress:update',
+    CREATE_BOOKMARK: 'bookmark:create',
+    DELETE_BOOKMARK: 'bookmark:delete',
+    CREATE_ORDER: 'order:create',
+    READ_ORDER: 'order:read',
+    READ_SUBSCRIPTION: 'subscription:read',
   },
-  CLIENT: {
-    SINGLE_ANALYZE: 'cv:single_analyze',
-    BULK_ANALYZE: 'cv:bulk_analyze',
-    READ_ANALYZE: 'cv:read_analyze',
-
-    READ_CV: 'cv:read',
-    UPDATE_CV: 'cv:update',
-    CREATE_CV: 'cv:create',
-    DELETE_CV: 'cv:delete',
-
-    READ_CHATS: 'chat:read',
-    UPDATE_CHATS: 'chat:update',
-    CREATE_CHATS: 'chat:create',
-    DELETE_CHATS: 'chat:delete',
+  MENTOR: {
+    CREATE_PROJECT: 'project:create',
+    READ_PROJECT: 'project:read',
+    UPDATE_PROJECT: 'project:update',
+    DELETE_PROJECT: 'project:delete',
+    PUBLISH_PROJECT: 'project:publish',
+    CREATE_CLASS: 'class:create',
+    READ_CLASS: 'class:read',
+    UPDATE_CLASS: 'class:update',
+    DELETE_CLASS: 'class:delete',
+    UPLOAD_ASSET: 'asset:create',
+    READ_ASSET: 'asset:read',
+    DELETE_ASSET: 'asset:delete',
+    READ_ENROLLMENT: 'enrollment:read',
+    READ_REVENUE: 'revenue:read',
+    READ_PAYOUT: 'payout:read',
+  },
+  ADMIN: {
+    MANAGE_USERS: 'admin:users',
+    MANAGE_MENTORS: 'admin:mentors',
+    MODERATE_PROJECTS: 'admin:projects',
+    MODERATE_CLASSES: 'admin:classes',
+    READ_TRAFFIC: 'admin:traffic',
+    READ_REVENUE: 'admin:revenue',
+    MANAGE_PAYMENTS: 'payment:manage',
+    MANAGE_SUBSCRIPTIONS: 'subscription:manage',
+    MANAGE_SETTINGS: 'admin:settings',
   },
 } as const);

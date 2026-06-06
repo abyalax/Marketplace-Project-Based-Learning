@@ -9,7 +9,7 @@ export const useResetPassword = () => {
   return useMutation({
     mutationKey: [QUERY_KEY.AUTH.RESET_PASSWORD],
     mutationFn: async (payload: PayloadResetPassword) => await resetPassword(payload),
-    meta: { invalidateQueries: [QUERY_KEY.CLIENT.GETS] },
+    meta: { invalidateQueries: [QUERY_KEY.USER.GETS] },
     onSuccess: () => toast.success('Successfully reset password'),
     onError: (error: AxiosError<TResponse>) => {
       const message = error.response?.data.message ?? 'Failed to reset password';

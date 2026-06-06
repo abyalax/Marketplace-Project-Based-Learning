@@ -11,7 +11,7 @@ export const useForgotPassword = () => {
   return useMutation({
     mutationKey: [QUERY_KEY.AUTH.FORGOT_PASSWORD],
     mutationFn: async (payload: Payload) => await forgotPassword(payload),
-    meta: { invalidateQueries: [QUERY_KEY.CLIENT.GETS] },
+    meta: { invalidateQueries: [QUERY_KEY.USER.GETS] },
     onSuccess: () => toast.success('Send Email Reset Password, check your email'),
     onError: (error: AxiosError<TResponse>) => {
       console.log('useForgotPassword error : ', error);

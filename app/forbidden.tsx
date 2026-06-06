@@ -28,11 +28,17 @@ export default function ForbiddenPage() {
           Go Back
         </button>
 
-        <button onClick={() => push('/')} className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700">
+        <button
+          onClick={() => push('/')}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
+        >
           Go Home
         </button>
 
-        <button onClick={() => refresh()} className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100">
+        <button
+          onClick={() => refresh()}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-gray-600 hover:bg-gray-100"
+        >
           Refresh Page
         </button>
       </div>

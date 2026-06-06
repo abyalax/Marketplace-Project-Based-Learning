@@ -19,7 +19,12 @@ export function Loading({ size = 'xl', className }: LoadingProps) {
     <div className={cn('relative', className)}>
       {/* Main spinner - dengan border yang lebih kontras */}
       <div
-        className={cn(sizeClasses, 'rounded-full animate-spin', 'border-border/30 border-t-primary', 'dark:border-muted-foreground/20 dark:border-t-primary')}
+        className={cn(
+          sizeClasses,
+          'rounded-full animate-spin',
+          'border-border/30 border-t-primary',
+          'dark:border-muted-foreground/20 dark:border-t-primary',
+        )}
       ></div>
 
       {/* Secondary glow effect */}

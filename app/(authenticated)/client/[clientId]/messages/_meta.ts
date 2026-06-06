@@ -1,3 +1,3 @@
 import { PERMISSIONS } from '~/common/const/permission';
 
-export const permissions = [PERMISSIONS.CLIENT.READ_CHATS];
+export const permissions = [PERMISSIONS.LEARNER.READ_MESSAGES];

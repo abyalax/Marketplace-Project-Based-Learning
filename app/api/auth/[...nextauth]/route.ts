@@ -4,6 +4,7 @@ import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { env } from '~/common/const/credential';
+import { ROLE } from '~/common/const/permission';
 import { NotFoundException, UnauthorizedException } from '~/lib/handler/error';
 import { userService } from '~/modules/users/user.service';
 
@@ -90,7 +91,7 @@ const options: AuthOptions = {
               create: {
                 role: {
                   connect: {
-                    id: 1,
+                    name: ROLE.LEARNER,
                   },
                 },
               },
