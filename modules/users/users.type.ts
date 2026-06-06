@@ -18,4 +18,18 @@ export interface User {
   permissions: Permission[];
 }
 
+export type UserListItem = Omit<User, 'password' | 'permissions'> & {
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export type UserDetail = UserListItem;
+
+export type UserPayload = {
+  name: string;
+  email: string;
+  password?: string;
+  roleIds: number[];
+};
+
 export type ClientId = { clientId: string };

@@ -60,9 +60,9 @@ export const sidebarItems = (clientId: string): MenuGroup[] => [
       },
       {
         title: 'Users',
-        url: url('/backoffice/clients'),
+        url: url('/users'),
         icon: Users,
-        permissions: [PERMISSIONS.ADMIN.MANAGE_USERS],
+        permissions: [PERMISSIONS.USERS.READ],
       },
     ],
   },

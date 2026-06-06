@@ -150,3 +150,53 @@ Tambahkan path lain ke `publicRoutes` di `middleware.ts` jika dibutuhkan.
 - Jika user tidak punya izin:
   - Pada halaman/API yang dilindungi middleware: akan di-redirect ke `/auth/login`.
   - Dengan `safeHandler`: handler dapat mengembalikan `403` JSON secara eksplisit.
+
+
+## Mastra
+
+### Mastra Folder Structure
+
+Folders organize your agent's resources, like agents, tools, and workflows.
+
+| Folder                 | Description                                                                                                                              |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/mastra`           | Entry point for all Mastra-related code and configuration.                                                                               |
+| `src/mastra/agents`    | Define and configure your agents - their behavior, goals, and tools.                                                                     |
+| `src/mastra/workflows` | Define multi-step workflows that orchestrate agents and tools together.                                                                  |
+| `src/mastra/tools`     | Create reusable tools that your agents can call                                                                                          |
+| `src/mastra/mcp`       | (Optional) Implement custom MCP servers to share your tools with external agents                                                         |
+| `src/mastra/scorers`   | (Optional) Define scorers for evaluating agent performance over time                                                                     |
+| `src/mastra/public`    | (Optional) Contents are copied into the `.build/output` directory during the build process, making them available for serving at runtime |
+
+### Top-level files
+
+Top-level files define how your Mastra project is configured, built, and connected to its environment.
+
+| File                  | Description                                                                                                       |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `src/mastra/index.ts` | Central entry point where you configure and initialize Mastra.                                                    |
+| `.env.example`        | Template for environment variables - copy and rename to `.env` to add your secret [model provider](/models) keys. |
+| `package.json`        | Defines project metadata, dependencies, and available npm scripts.                                                |
+| `tsconfig.json`       | Configures TypeScript options such as path aliases, compiler settings, and build output.                          |
+
+## MCP Docs Server
+
+This project has the Mastra MCP Docs Server configured for Vscode.
+
+### Using MCP Docs
+
+The MCP server provides embedded documentation access within your editor:
+
+1. The server was automatically configured during project creation
+2. Restart your editor to load the MCP server
+3. Use the Mastra docs tools in your editor to access:
+   - API references
+   - Code examples
+   - Integration guides
+
+Learn more in the [MCP Documentation](https://mastra.ai/docs/mcp/overview).
+
+### Resources
+
+- [Mastra Documentation](https://mastra.ai/llms.txt)
+- [Mastra .well-known skills discovery](https://mastra.ai/.well-known/skills/index.json)

@@ -8,6 +8,12 @@ export const ROLE = Object.freeze({
 } as const);
 
 export const PERMISSIONS = Object.freeze({
+  USERS: {
+    READ: 'users:read',
+    CREATE: 'users:create',
+    UPDATE: 'users:update',
+    DELETE: 'users:delete',
+  },
   LEARNER: {
     READ_PROJECT: 'project:read',
     READ_CLASS: 'class:read',

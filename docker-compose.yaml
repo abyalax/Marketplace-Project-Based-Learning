@@ -69,26 +69,26 @@ services:
       mc anonymous set download local/$$MINIO_BUCKET;
       "
 
-  dbgate:
-    image: dbgate/dbgate
-    container_name: marketplace_project_dbms
-    restart: no
-    depends_on:
-      - postgres
-    ports:
-      - 8080:3000
-    volumes:
-      - dbgate_data:/var/lib/dbgate/data
-    environment:
-      PORT: 3000
-      CONNECTIONS: POSTGRES
-      LABEL_POSTGRES: Postgres
-      SERVER_POSTGRES: postgres
-      USER_POSTGRES: marketplace_project
-      PASSWORD_POSTGRES: marketplace_project
-      PORT_POSTGRES: 5432
-      ENGINE_POSTGRES: postgres@dbgate-plugin-postgres
-      DATABASE_POSTGRES: db_marketplace_project
+  # dbgate:
+  #   image: dbgate/dbgate
+  #   container_name: marketplace_project_dbms
+  #   restart: no
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - 8080:3000
+  #   volumes:
+  #     - dbgate_data:/var/lib/dbgate/data
+  #   environment:
+  #     PORT: 3000
+  #     CONNECTIONS: POSTGRES
+  #     LABEL_POSTGRES: Postgres
+  #     SERVER_POSTGRES: postgres
+  #     USER_POSTGRES: marketplace_project
+  #     PASSWORD_POSTGRES: marketplace_project
+  #     PORT_POSTGRES: 5432
+  #     ENGINE_POSTGRES: postgres@dbgate-plugin-postgres
+  #     DATABASE_POSTGRES: db_marketplace_project
 
 volumes:
   postgres_data:

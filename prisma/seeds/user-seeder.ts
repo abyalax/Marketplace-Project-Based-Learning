@@ -13,6 +13,10 @@ const prisma = new PrismaClient({
 });
 
 const permissionsData = [
+  { key: PERMISSIONS.USERS.READ, name: 'Read Users' },
+  { key: PERMISSIONS.USERS.CREATE, name: 'Create Users' },
+  { key: PERMISSIONS.USERS.UPDATE, name: 'Update Users' },
+  { key: PERMISSIONS.USERS.DELETE, name: 'Delete Users' },
   { key: PERMISSIONS.LEARNER.READ_PROJECT, name: 'Read Projects' },
   { key: PERMISSIONS.LEARNER.READ_CLASS, name: 'Read Classes' },
   { key: PERMISSIONS.LEARNER.READ_MESSAGES, name: 'Read Messages' },
@@ -65,6 +69,7 @@ const rolePermissionKeys = {
     PERMISSIONS.LEARNER.READ_SUBSCRIPTION,
   ],
   [ROLE.MENTOR]: [
+    PERMISSIONS.USERS.READ,
     PERMISSIONS.LEARNER.READ_PROJECT,
     PERMISSIONS.LEARNER.READ_CLASS,
     PERMISSIONS.MENTOR.CREATE_PROJECT,
@@ -120,9 +125,9 @@ export async function userSeeder() {
   });
 
   const [learnerPass, mentorPass, adminPass] = await Promise.all([
-    bcrypt.hash('learner_pass', 10),
-    bcrypt.hash('mentor_pass', 10),
-    bcrypt.hash('admin_pass', 10),
+    bcrypt.hash('learnerPassword1_', 10),
+    bcrypt.hash('mentorPassword1_', 10),
+    bcrypt.hash('adminPassword1_', 10),
   ]);
 
   const learner = await prisma.user.upsert({

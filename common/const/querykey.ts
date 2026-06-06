@@ -29,6 +29,9 @@ export const QUERY_KEY = {
     UPDATE: 'update_user',
     DELETE: 'delete_user',
   },
+  ROLE: {
+    GETS: 'get_roles',
+  },
 } as const;
 
 export type QueryKey<T = string> = ExtractString<typeof QUERY_KEY> & T;
