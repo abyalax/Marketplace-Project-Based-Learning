@@ -30,5 +30,23 @@
     ".next/types/**/*.ts",
     "app/charts/_components/clustered/chart.tss"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "modules/cv",
+    "data/cv",
+    "prisma/data.ts",
+    "prisma/seeds/cv-seeder.ts",
+    "app/(authenticated)/client/[clientId]/cv/_components",
+    "app/(authenticated)/client/[clientId]/cv/_hooks",
+    "app/(authenticated)/client/[clientId]/cv/[cvId]/_components",
+    "app/(authenticated)/client/[clientId]/cv/[cvId]/update/_components",
+    "app/(authenticated)/client/[clientId]/cv/create/_components",
+    "app/(authenticated)/client/[clientId]/analyze/_components",
+    "app/(authenticated)/client/[clientId]/analyze/_hooks",
+    "app/(authenticated)/client/[clientId]/analyze/[id]/_components",
+    "app/(public)/qrcode/[clientId]/[cvId]/_components",
+    "app/(public)/qrcode/[clientId]/[cvId]/_hooks",
+    "docs/examples/legacy-cv-pattern",
+    ".legacy-cv-pattern"
+  ]
 }
