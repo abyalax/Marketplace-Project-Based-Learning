@@ -1,0 +1,85 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
+import { env } from './common/const/credential';
+import { routePermissions } from './lib/routes/permissions';
+import { matchPermission } from './lib/utils';
+
+const publicRoutes = new Set(['/auth/register', '/auth/login', '/auth/forgot-password', '/auth/reset-password']);
+
+function getRequiredPermissions(pathname: string): string[] {
+  // static match first (High Priority)
+  if (routePermissions[pathname]) return routePermissions[pathname];
+  const patterns = Object.entries(routePermissions)
+    .filter(([pattern]) => pattern.includes(':') || pattern.includes('*'))
+    .sort((a, b) => b[0].length - a[0].length);
+
+  for (const [pattern, permissions] of patterns) {
+    if (matchesPattern(pathname, pattern)) return permissions;
+  }
+  return [];
+}
+
+function matchesPattern(pathname: string, pattern: string): boolean {
+  const pathSegments = pathname.split('/').filter(Boolean);
+  const patternSegments = pattern.split('/').filter(Boolean);
+  if (pattern.endsWith('*')) {
+    // Catch-all route [...slug]
+    const basePattern = patternSegments.slice(0, -1);
+    return (
+      pathSegments.length >= basePattern.length && basePattern.every((seg, i) => seg.startsWith(':') || seg === pathSegments[i])
+    );
+  }
+  // Dynamic base route should act as PREFIX
+  // example
+  // pattern: /:customerId
+  // path:    /1/guests, /1/guests/123
+  if (patternSegments.some((seg) => seg.startsWith(':'))) {
+    if (pathSegments.length < patternSegments.length) return false;
+    return patternSegments.every((seg, i) => seg.startsWith(':') || seg === pathSegments[i]);
+  }
+  if (pathSegments.length !== patternSegments.length) return false;
+  return patternSegments.every((seg, i) => seg.startsWith(':') || seg === pathSegments[i]);
+}
+
+export async function middleware(req: NextRequest) {
+  let loginUrl: string | URL;
+  try {
+    const pathname = req.nextUrl.pathname;
+    // ✅ Skip middleware untuk NextAuth API routes
+    if (pathname.startsWith('/api/auth')) return NextResponse.next();
+    if (publicRoutes.has(pathname)) return NextResponse.next();
+    const token = await getToken({ req, secret: env.JWT_SECRET });
+    const userPermissions: string[] = token?.permissions?.map((p) => p.key) || [];
+    const requiredPermissions = getRequiredPermissions(pathname);
+    const method = req.method;
+    console.log(` ${method} ${pathname} 🔑 Required permissions: `, requiredPermissions);
+    const hasPermission = requiredPermissions.every((p) => matchPermission(userPermissions, p));
+    console.log(`🛡️  pass middleware: `, hasPermission);
+    if (!hasPermission) {
+      loginUrl = new URL('/auth/login', req.url);
+      loginUrl.searchParams.set('callbackUrl', req.url);
+      return NextResponse.redirect(loginUrl);
+    }
+    return NextResponse.next();
+  } catch (error) {
+    console.dir((error as Error).message);
+    loginUrl = new URL('/auth/login', req.url);
+    loginUrl.searchParams.set('callbackUrl', req.url);
+    return NextResponse.redirect(loginUrl);
+  }
+}
+
+export const config = {
+  matcher: [
+    // Protect semua API routes
+    '/api/:path*',
+    // Match semua route kecuali:
+    // - Next.js static & image
+    // - favicon
+    // - login
+    // - icon
+    // - dot-files (/.well-known, .htaccess, dsb)
+    // - files dengan extension (.js, .css, .png, .jpg, .svg, dll)
+    '/((?!_next/static|_next/image|favicon.ico|icon|\\..+|.+\\..+).*)',
+  ],
+};
