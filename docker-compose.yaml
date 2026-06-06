@@ -1,26 +1,29 @@
 services:
   postgres:
     image: pgvector/pgvector:pg15
-    container_name: boilerplate_next_postgres
+    container_name: marketplace_project_postgres
     restart: no
     environment:
-      POSTGRES_USER: boilerplate_next
-      POSTGRES_PASSWORD: boilerplate_next
-      POSTGRES_DB: db_boilerplate_next
+      POSTGRES_USER: marketplace_project
+      POSTGRES_PASSWORD: marketplace_project
+      POSTGRES_DB: db_marketplace_project
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test:
-        ["CMD-SHELL", "pg_isready -U boilerplate_next -d db_boilerplate_next"]
+        [
+          "CMD-SHELL",
+          "pg_isready -U marketplace_project -d db_marketplace_project",
+        ]
       interval: 5s
       timeout: 5s
       retries: 5
 
   mailpit:
     image: axllent/mailpit:latest
-    container_name: boilerplate_next_mailpit
+    container_name: marketplace_project_mailpit
     ports:
       - "${MAILPIT_SMTP_PORT}:1025"
       - "${MAILPIT_UI_PORT}:8025"
@@ -30,6 +33,65 @@ services:
     volumes:
       - mailpit_data:/var/lib/mailpit/data
 
+  minio:
+    image: minio/minio:latest
+    container_name: marketplace_project_minio
+    restart: no
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "${MINIO_API_PORT}:9000"
+      - "${MINIO_CONSOLE_PORT}:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio-bucket:
+    image: minio/mc:latest
+    container_name: marketplace_project_minio_bucket
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET: ${MINIO_BUCKET}
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 $$MINIO_ROOT_USER $$MINIO_ROOT_PASSWORD;
+      mc mb --ignore-existing local/$$MINIO_BUCKET;
+      mc anonymous set download local/$$MINIO_BUCKET;
+      "
+
+  dbgate:
+    image: dbgate/dbgate
+    container_name: marketplace_project_dbms
+    restart: no
+    depends_on:
+      - postgres
+    ports:
+      - 8080:3000
+    volumes:
+      - dbgate_data:/var/lib/dbgate/data
+    environment:
+      PORT: 3000
+      CONNECTIONS: POSTGRES
+      LABEL_POSTGRES: Postgres
+      SERVER_POSTGRES: postgres
+      USER_POSTGRES: marketplace_project
+      PASSWORD_POSTGRES: marketplace_project
+      PORT_POSTGRES: 5432
+      ENGINE_POSTGRES: postgres@dbgate-plugin-postgres
+      DATABASE_POSTGRES: db_marketplace_project
+
 volumes:
   postgres_data:
   mailpit_data:
+  minio_data:
+  dbgate_data:

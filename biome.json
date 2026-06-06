@@ -15,7 +15,19 @@
       "!out",
       "!build",
       "!dist",
-      "!drizzle"
+      "!drizzle",
+      "!modules/cv",
+      "!data/cv",
+      "!prisma/data.ts",
+      "!prisma/seeds/cv-seeder.ts",
+      "!app/(authenticated)/client/\\[clientId\\]/cv/_components",
+      "!app/(authenticated)/client/\\[clientId\\]/cv/_hooks",
+      "!app/(authenticated)/client/\\[clientId\\]/analyze/_components",
+      "!app/(authenticated)/client/\\[clientId\\]/analyze/_hooks",
+      "!app/(public)/qrcode/\\[clientId\\]/\\[cvId\\]/_components",
+      "!app/(public)/qrcode/\\[clientId\\]/\\[cvId\\]/_hooks",
+      "!docs/examples/legacy-cv-pattern",
+      "!.legacy-cv-pattern"
     ]
   },
   "formatter": {
@@ -78,7 +90,19 @@
       "!out",
       "!build",
       "!dist",
-      "!drizzle"
+      "!drizzle",
+      "!modules/cv",
+      "!data/cv",
+      "!prisma/data.ts",
+      "!prisma/seeds/cv-seeder.ts",
+      "!app/(authenticated)/client/\\[clientId\\]/cv/_components",
+      "!app/(authenticated)/client/\\[clientId\\]/cv/_hooks",
+      "!app/(authenticated)/client/\\[clientId\\]/analyze/_components",
+      "!app/(authenticated)/client/\\[clientId\\]/analyze/_hooks",
+      "!app/(public)/qrcode/\\[clientId\\]/\\[cvId\\]/_components",
+      "!app/(public)/qrcode/\\[clientId\\]/\\[cvId\\]/_hooks",
+      "!docs/examples/legacy-cv-pattern",
+      "!.legacy-cv-pattern"
     ],
     "actions": {
       "source": {
